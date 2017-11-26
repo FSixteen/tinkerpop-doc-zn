@@ -799,9 +799,9 @@ table.CodeRay td.code>pre{padding:0}
 <body class="book toc2 toc-left">
 <div id="header">
 <div id="toc" class="toc2">
-<div id="toctitle">Table of Contents</div>
+<div id="toctitle">目录</div>
 <ul class="sectlevel0">
-<li><a href="index.html#preface">TinkerPop3 Documentation</a>
+<li><a href="index.html#preface">TinkerPop3文档</a>
 <ul class="sectlevel1">
 <li><a href="index.html#_tinkerpop0">TinkerPop0</a></li>
 <li><a href="index.html#_tinkerpop1">TinkerPop1</a></li>
@@ -809,14 +809,14 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="index.html#_tinkerpop3">TinkerPop3</a></li>
 </ul>
 </li>
-<li><a href="index.html#intro">Introduction to Graph Computing</a>
+<li><a href="index.html#intro">Graph Computing介绍</a>
 <ul class="sectlevel1">
-<li><a href="index.html#_the_graph_structure">The Graph Structure</a>
+<li><a href="index.html#_the_graph_structure">Graph(图)结构</a>
 <ul class="sectlevel2">
-<li><a href="index.html#_mutating_the_graph">Mutating the Graph</a></li>
+<li><a href="index.html#_mutating_the_graph">变形Graph(图)</a></li>
 </ul>
 </li>
-<li><a href="index.html#the-graph-process">The Graph Process</a>
+<li><a href="index.html#the-graph-process">Graph(图)步骤</a>
 <ul class="sectlevel2">
 <li><a href="index.html#_the_traverser">The Traverser</a></li>
 </ul>
@@ -1160,19 +1160,19 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 </div>
-<h1 id="preface" class="sect0">TinkerPop3 Documentation</h1>
+<h1 id="preface" class="sect0">TinkerPop3文档</h1>
 <div class="openblock partintro">
 <div class="content">
-In the beginning&#8230;&#8203;
+起初&#8230;&#8203;
 </div>
 </div>
 <div class="sect1">
 <h2 id="_tinkerpop0">TinkerPop0</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Gremlin realized. The more he did so, the more ideas he created. The more ideas he created, the more they related.
+<p>Gremlin已实现。他思考的越多，想法也就越多。想法越多，其相关性也就越强。
 Into a concatenation of that which he accepted wholeheartedly and that which perhaps may ultimately come to be through
-concerted will, a world took form which was seemingly separate from his own realization of it. However, the world
+concerted will, a world took form which was seemingly separate from his own realization of it. 然而，the world
 birthed could not bear its own weight without the logic Gremlin had come to accept&#8201;&#8212;&#8201;the logic of left is not right,
 up not down, and west far from east unless one goes the other way. Gremlin&#8217;s realization required Gremlin&#8217;s
 realization. Perhaps, the world is simply an idea that he once had&#8201;&#8212;&#8201;The TinkerPop.</p>
@@ -1464,13 +1464,7 @@ providers, then the standard Java naming convention is followed (e.g. <code>getN
 <h2 id="_the_graph_structure">The Graph Structure</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><span class="image" style="float: left"><img src="../images/gremlin-standing.png" alt="gremlin standing" width="125"></span> A graph&#8217;s structure is the topology formed by the explicit references
-between its vertices, edges, and properties. A vertex has incident edges. A vertex is adjacent to another vertex if
-they share an incident edge. A property is attached to an element and an element has a set of properties. A property
-is a key/value pair, where the key is always a character <code>String</code>. The graph structure API of TinkerPop3 provides the
-methods necessary to create such a structure. The TinkerPop graph previously diagrammed can be created with the
-following Java 8 code. Note that this graph is available as an in-memory TinkerGraph using
-<code>TinkerFactory.createClassic()</code>.</p>
+<p><span class="image" style="float: left"><img src="../images/gremlin-standing.png" alt="gremlin standing" width="125"></span> Graph(图)结构是一个由其顶点、边和属性之间显式引用所形成的拓扑。一个顶点有关联边。如果另一顶点与其共享同一关联边，则该顶点是另一顶点的邻近顶点。一个属性可被附加到一个元素上，一个元素可拥有一组属性。一个属性是一个key/value(键/值)对，在这里，key(键)一直是<code>String</code>。TinkerPop3图结构API提供了创建此类结构所需要的方法。可以通过以下Java 8代码创建之前绘制的TinkerPop图形。注意，使用<code>TinkerFactory.createClassic()</code>可获得一个内存级别的TinkerGraph图.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1492,13 +1486,13 @@ peter.addEdge(<span class="string"><span class="delimiter">&quot;</span><span cl
 <div class="colist arabic">
 <ol>
 <li>
-<p>Create a new in-memory <code>TinkerGraph</code> and assign it to the variable <code>graph</code>.</p>
+<p>创建一个新内存级别的<code>TinkerGraph</code>图，并将其分配给<code>graph</code>变量。</p>
 </li>
 <li>
-<p>Create a vertex along with a set of key/value pairs with <code>T.label</code> being the vertex label and <code>T.id</code> being the vertex id.</p>
+<p>创建一个顶点并一同创建一组key/value(键/值)对，其中<code>T.label</code>作为顶点的label，<code>T.id</code>作为顶点的id。</p>
 </li>
 <li>
-<p>Create an edge along with a  set of key/value pairs with the edge label being specified as the first argument.</p>
+<p>创建一条边并一同创建一组key/value(键/值)对，其中边的label明确指定作为第一个参数。</p>
 </li>
 </ol>
 </div>
@@ -8179,10 +8173,14 @@ gremlin&gt; g.V(<span class="integer">4</span>).inE().bothV()
 </div>
 <div class="sect2">
 <h3 id="where-step">Where Step</h3>
+<div class="imageblock">
+    <div class="content">
+        <img src="../images/tinkerpop-modern.png" alt="tinkerpop modern" width="500">
+    </div>
+</div>
 <div class="paragraph">
-<p>The <code>where()</code>-step filters the current object based on either the object itself (<code>Scope.local</code>) or the path history
-of the object (<code>Scope.global</code>) (<strong>filter</strong>). This step is typically used in conjuction with either
-<a href="index.html#match-step"><code>match()</code></a>-step or <a href="index.html#select-step"><code>select()</code></a>-step, but can be used in isolation.</p>
+<p><code>where()</code>步骤根据对象自身(<code>Scope.local</code>)或者对象的历史路径(<code>Scope.global</code>) (<strong>filter</strong>)来过滤当前对象。此步骤通常与
+<a href="index.html#match-step"><code>match()</code></a>步骤或<a href="index.html#select-step"><code>select()</code></a>步骤联合使用，但可以单独使用。</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -8199,13 +8197,13 @@ gremlin&gt; g.V(<span class="integer">1</span>).out(<span class="string"><span c
 <div class="colist arabic">
 <ol>
 <li>
-<p>Who are marko&#8217;s collaborators, where marko can not be his own collaborator? (predicate)</p>
+<p>谁是marko的合作者，在这里marko不能成为他自己的合作者？(predicate)</p>
 </li>
 <li>
-<p>Of the co-creators of marko, only keep those whose name is josh or peter. (using a sideEffect)</p>
+<p>在marko的联合创始人中，只保留那些名字叫josh或peter的人。(使用sideEffect()步骤)</p>
 </li>
 <li>
-<p>Which of marko&#8217;s collaborators have worked on more than 1 project? (using a traversal)</p>
+<p>marko的合作者中哪一个 have worked on more than 1 project? (using a traversal)</p>
 </li>
 </ol>
 </div>
