@@ -811,12 +811,12 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 <li><a href="index.html#intro">Graph Computing介绍</a>
 <ul class="sectlevel1">
-<li><a href="index.html#_the_graph_structure">Graph(图)结构</a>
+<li><a href="index.html#_the_graph_structure">Graph结构</a>
 <ul class="sectlevel2">
-<li><a href="index.html#_mutating_the_graph">变形Graph(图)</a></li>
+<li><a href="index.html#_mutating_the_graph">变形Graph</a></li>
 </ul>
 </li>
-<li><a href="index.html#the-graph-process">Graph(图)步骤</a>
+<li><a href="index.html#the-graph-process">Graph步骤</a>
 <ul class="sectlevel2">
 <li><a href="index.html#_the_traverser">The Traverser</a></li>
 </ul>
@@ -1396,7 +1396,7 @@ of the graph is the means by which the structure is analyzed. The typical form o
 <div class="ulist">
 <ul>
 <li>
-<p><code>GraphTraversal</code>: a traversal DSL that is oriented towards the semantics of the raw graph (i.e. vertices, edges, etc.).</p>
+<p><code>GraphTraversal</code>: 面向原始图的语义遍历DSL(即: 顶点, 边, ...).</p>
 </li>
 </ul>
 </div>
@@ -1405,14 +1405,14 @@ of the graph is the means by which the structure is analyzed. The typical form o
 </div>
 </li>
 <li>
-<p><code>GraphComputer</code>: a system that processes the graph in parallel and potentially, distributed over a multi-machine cluster.</p>
+<p><code>GraphComputer</code>: 一个并行处理图形的系统, 可能分布在多机器集群上.</p>
 <div class="ulist">
 <ul>
 <li>
-<p><code>VertexProgram</code>: code executed at all vertices in a logically parallel manner with intercommunication via message passing.</p>
+<p><code>VertexProgram</code>: 在所有顶点以逻辑并行方式执行的代码, 通过消息传递进行相互通信.</p>
 </li>
 <li>
-<p><code>MapReduce</code>: a computations that analyzes all vertices in the graph in parallel and yields a single reduced result.</p>
+<p><code>MapReduce</code>: 并行分析图中的所有顶点并产生单个简化结果的计算.</p>
 </li>
 </ul>
 </div>
@@ -1426,21 +1426,13 @@ of the graph is the means by which the structure is analyzed. The typical form o
 <div class="title">Important</div>
 </td>
 <td class="content">
-TinkerPop3 is licensed under the popular <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache2</a>
-free software license. However, note that the underlying graph engine used with TinkerPop3 may have a different
-license. Thus, be sure to respect the license caveats of the graph system product.
+TinkerPop3遵循流行的<a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache2</a>免费软件许可. 然而, 请注意与TinkerPop3一起使用的底层Graph引擎可能具有不同的许可. 因此, 请务必尊重Graph系统产品的许可事项。
 </td>
 </tr>
 </table>
 </div>
 <div class="paragraph">
-<p><span class="image" style="float: left"><img src="../images/tinkerpop-enabled.png" alt="tinkerpop enabled" width="135"></span> When a graph system implements the TinkerPop3 structure and process
-<a href="http://en.wikipedia.org/wiki/Application_programming_interface">APIs</a>, their technology is considered
-<em>TinkerPop3-enabled</em> and becomes nearly indistinguishable from any other TinkerPop-enabled graph system save for
-their respective time and space complexity. The purpose of this documentation is to describe the structure/process
-dichotomy at length and in doing so, explain how to leverage TinkerPop3 for the sole purpose of graph system-agnostic
-graph computing. Before deep-diving into the various structure/process APIs, a short introductory review of both APIs
-is provided.</p>
+<p><span class="image" style="float: left"><img src="../images/tinkerpop-enabled.png" alt="tinkerpop enabled" width="135"></span>当一个Graph系统实现了TinkerPop3的structure/process <a href="http://en.wikipedia.org/wiki/Application_programming_interface">API</a>时, 使用<em>TinkerPop3</em>驱动, 他们的技术是经过深思熟虑的, 并且与任何其他使用TinkerPop驱动的Graph系统几乎没有任何区别, 除了他们各自的时间及空间复杂度. 本文档的目的是在长度和内部内容两个方面描述structure/process, 并解释如何利用TinkerPop3来完成Graph系统不可预知的图计算. 在深入研究各种structure/process API之前, 先简要介绍一下这两种API.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -1449,8 +1441,7 @@ is provided.</p>
 <div class="title">Note</div>
 </td>
 <td class="content">
-The TinkerPop3 API rides a fine line between providing concise "query language" method names and respecting
-Java method naming standards. The general convention used throughout TinkerPop3 is that if a method is "user exposed,"
+TinkerPop3 API在提供简洁的"query language"方法名称和尊重Java方法命名标准之间画出了一道细线. The general convention used throughout TinkerPop3 is that if a method is "user exposed,"
 then a concise name is provided (e.g. <code>out()</code>, <code>path()</code>, <code>repeat()</code>). If the method is primarily for graph systems
 providers, then the standard Java naming convention is followed (e.g. <code>getNextStep()</code>, <code>getSteps()</code>,
 <code>getElementComputeKeys()</code>).
@@ -1464,7 +1455,7 @@ providers, then the standard Java naming convention is followed (e.g. <code>getN
 <h2 id="_the_graph_structure">The Graph Structure</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><span class="image" style="float: left"><img src="../images/gremlin-standing.png" alt="gremlin standing" width="125"></span> Graph(图)结构是一个由其顶点、边和属性之间显式引用所形成的拓扑。一个顶点有关联边。如果另一顶点与其共享同一关联边，则该顶点是另一顶点的邻近顶点。一个属性可被附加到一个元素上，一个元素可拥有一组属性。一个属性是一个key/value(键/值)对，在这里，key(键)一直是<code>String</code>。TinkerPop3图结构API提供了创建此类结构所需要的方法。可以通过以下Java 8代码创建之前绘制的TinkerPop图形。注意，使用<code>TinkerFactory.createClassic()</code>可获得一个内存级别的TinkerGraph图.</p>
+<p><span class="image" style="float: left"><img src="../images/gremlin-standing.png" alt="gremlin standing" width="125"></span> Graph结构是一个由其顶点、边和属性之间显式引用所形成的拓扑。一个顶点有关联边。如果另一顶点与其共享同一关联边，则该顶点是另一顶点的邻近顶点。一个属性可被附加到一个元素上，一个元素可拥有一组属性。一个属性是一个key/value(键/值)对，在这里，key(键)一直是<code>String</code>。TinkerPop3图结构API提供了创建此类结构所需要的方法。可以通过以下Java 8代码创建之前绘制的TinkerPop图形。注意，使用<code>TinkerFactory.createClassic()</code>可获得一个内存级别的TinkerGraph图.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1497,10 +1488,7 @@ peter.addEdge(<span class="string"><span class="delimiter">&quot;</span><span cl
 </ol>
 </div>
 <div class="paragraph">
-<p>In the above code all the vertices are created first and then their respective edges. There are two "accessor tokens":
-<code>T.id</code> and <code>T.label</code>. When any of these, along with a set of other key value pairs is provided to
-<code>Graph.addVertex(Object&#8230;&#8203;)</code> or <code>Vertex.addEdge(String,Vertex,Object&#8230;&#8203;)</code>, the respective element is created along
-with the provided key/value pair properties appended to it.</p>
+<p>在上面的代码中, 首先创建所有的定点, 然后创建他们各自的边. 有两个"访问器标签(accessor tokens)": <code>T.id</code> 和 <code>T.label</code>. 当其中的任何一个连同一组其他key/value对一起提供给<code>Graph.addVertex(Object&#8230;&#8203;)</code> 或 <code>Vertex.addEdge(String,Vertex,Object&#8230;&#8203;)</code>时, 相应的元素连同所提供的key/value对属性一起被创建.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -1518,29 +1506,24 @@ with the provided key/value pair properties appended to it.</p>
 <table>
 <tr>
 <td class="icon">
-<div class="title">Note</div>
+<div class="title">注意</div>
 </td>
 <td class="content">
-In TinkerPop3, vertices are allowed a single immutable string label (similar to an edge label). This
-functionality did not exist in TinkerPop2. Element ids are still immutable in TinkerPop3 as they were in TinkerPop2.
+在TinkerPop3中, 顶点允许有一个不可变的字符串标签(类似于边标签). 这个功能在TinkerPop2中不存在. 在TinkerPop3中, 元素ID仍然是不可变的, 和在TinkerPop2中一样.
 </td>
 </tr>
 </table>
 </div>
 <div class="sect2">
-<h3 id="_mutating_the_graph">Mutating the Graph</h3>
+<h3 id="_mutating_the_graph">Graph变化</h3>
 <div class="paragraph">
-<p>Below is a sequence of basic graph mutation operations represented in Java 8. One of the major differences between
-TinkerPop2 and TinkerPop3 is that in TinkerPop3, the Java convention of using setters and getters has been abandoned
-in favor of a syntax that is more aligned with the syntax of Gremlin-Groovy in TinkerPop2. Given that Gremlin-Java8
-and Gremlin-Groovy are nearly identical due to the inclusion of Java 8 lambdas, a big effort was made to ensure that
-both languages are as similar as possible.</p>
+<p>以下是在Java8中表示的一系列Graph变化后的基本操作. TinkerPop2 和 TinkerPop3 之间的主要区别之一在于, 在 TinkerPop3 中, 使用 setters 和 getters 的Java约定已经被抛弃, 以支持更符合 Gremlin-Groovy 在 TinkerPop2 中的语法. 由于包含 Java 8 lambdas , Gremlin-Java8 和 Gremlin-Groovy 几乎完全相同, 所以我们付出了很大的努力来确保两种语言尽可能相似.</p>
 </div>
 <div class="admonitionblock warning">
 <table>
 <tr>
 <td class="icon">
-<div class="title">Warning</div>
+<div class="title">警告</div>
 </td>
 <td class="content">
 In the code examples presented throughout this documentation, either Gremlin-Java8 or Gremlin-Groovy is used.
